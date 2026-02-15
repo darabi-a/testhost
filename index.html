@@ -23,11 +23,12 @@
         /* 2. کانتینر اصلی */
         .container {
             max-width: 800px;
+            width: 100%;
             margin: 0 auto;
             background-color: white;
             border-radius: 10px;
             padding: 30px;
-            box-shadow: 0 5px 30px rgba(255, 0, 0, 0.5);
+            box-shadow: 0 5px 30px rgba(45, 90, 39, 0.5);
         }
         
         /* 3. عنوان اصلی */
@@ -37,13 +38,15 @@
             margin-bottom: 20px;
             padding-bottom: 10px;
             border-bottom: 2px solid #e0e0e0;
+            font-size: clamp(20px, 5vw, 28px);
+            word-break: break-word;
         }
         
         /* 4. پاراگراف */
         p {
             margin-bottom: 20px;
             text-align: justify;
-            font-size: 18px;
+            font-size: clamp(14px, 4vw, 18px);
         }
         
         /* 5. کلمات مهم */
@@ -57,13 +60,14 @@
             background-color: #f5f9f4;
             padding: 20px;
             border-radius: 8px;
-            margin-top: 30px;
+            margin: 30px 0;
             border-right: 4px solid #2d5a27;
         }
         
         .pistachio-types h2 {
             color: #2d5a27;
             margin-bottom: 15px;
+            font-size: clamp(16px, 4.5vw, 24px);
         }
         
         /* 7. لیست */
@@ -74,7 +78,47 @@
         
         li {
             margin-bottom: 8px;
-            font-size: 17px;
+            font-size: clamp(14px, 3.5vw, 17px);
+            line-height: 1.5;
+        }
+        
+        /* استایل پایه دکمه */
+        button {
+            background-color: #2d5a27;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            font-size: clamp(14px, 4vw, 16px);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(45, 90, 39, 0.3);
+            margin: 20px auto;
+            display: block;
+            font-family: inherit;
+            text-align: center;
+            width: auto;
+            min-width: 120px;
+        }
+
+        /* هاور دکمه */
+        button:hover {
+            background-color: #3a6b32;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(45, 90, 39, 0.4);
+        }
+
+        /* حالت کلیک */
+        button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(45, 90, 39, 0.3);
+        }
+
+        /* حالت فوکوس برای دسترسی‌پذیری */
+        button:focus {
+            outline: 2px solid #4caf50;
+            outline-offset: 2px;
         }
         
         /* 8. فوتر */
@@ -84,61 +128,95 @@
             padding-top: 20px;
             border-top: 2px solid #e0e0e0;
             color: #666;
-            font-size: 14px;
         }
-        .aw{
-            text-align: center;
-        }
-        /* استایل پایه دکمه */
-button {
-    background-color: #2d5a27;
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 3px 10px rgba(45, 90, 39, 0.3);
-    margin: 20px 0;
-    display: block;
-    font-family: inherit;
-    text-align: center;
-    width: 120px;
-}
-
-/* هاور دکمه */
-button:hover {
-    background-color: #3a6b32;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(45, 90, 39, 0.4);
-}
-
-/* حالت کلیک */
-button:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 5px rgba(45, 90, 39, 0.3);
-}
-
-/* حالت فوکوس برای دسترسی‌پذیری */
-button:focus {
-    outline: 2px solid #4caf50;
-    outline-offset: 2px;
-}
         
-        /* 9. طراحی واکنش‌گرا */
+        .aw {
+            text-align: center;
+            font-size: clamp(12px, 3.5vw, 14px);
+            margin-bottom: 5px;
+        }
+
+        /* لینک دکمه */
+        a {
+            text-decoration: none;
+            display: block;
+        }
+        
+        /* 9. طراحی واکنش‌گرا - بهبود برای موبایل */
         @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
             .container {
                 padding: 20px;
             }
             
+            .pistachio-types {
+                padding: 15px;
+            }
+            
+            ul {
+                padding-right: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 8px;
+            }
+            
+            .container {
+                padding: 15px;
+                border-radius: 8px;
+            }
+            
             h1 {
-                font-size: 24px;
+                font-size: 22px;
+            }
+            
+            .pistachio-types {
+                padding: 12px;
+                margin: 20px 0;
+            }
+            
+            li {
+                margin-bottom: 10px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            button {
+                width: 100%;
+                padding: 15px 20px;
+                min-width: auto;
+            }
+            
+            .container {
+                padding: 12px;
+            }
+            
+            h1 {
+                font-size: 20px;
             }
             
             p {
-                font-size: 16px;
+                text-align: right; /* بهتر شدن نمایش در صفحات خیلی کوچک */
+            }
+        }
+
+        /* بهبود نمایش برای موبایل‌های بسیار کوچک */
+        @media (max-width: 280px) {
+            body {
+                padding: 5px;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+            
+            .footer p {
+                font-size: 11px;
             }
         }
     </style>
@@ -170,10 +248,12 @@ button:focus {
                 هر کدام از این انواع، ویژگی‌های منحصر به فردی دارند و در بازارهای داخلی و خارجی طرفداران زیادی دارند.
             </p>
         </div>
-        <a href="https://github.com/darabi-a/testhost/blob/main/tamrin1.html"><button>بعدی</button></a>
+        
+        <a href="https://darabi-a.github.io/testhost2/"><button>بعدی</button></a>
+        
         <div class="footer">
             <p class="aw">محصولات ایرانی • کارگاه 13 واحد یادگیری 2 • 1404</p>
-            <p class="aw">ابوالفضل دارابی • کلاس یازدهم کامپیوتر • هنرستان ابوریهان بیرونی</p>
+            <p class="aw">ابوالفضل دارابی • کلاس یازدهم کامپیوتر • هنرستان ابوریحان بیرونی</p>
         </div>
     </div>
 </body>
