@@ -3,254 +3,352 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>محصولات ایرانی - پسته</title>
+    <title>فهرست محصولات ایرانی</title>
     <style>
-        /* 1. تنظیمات اولیه */
+        /* ---------- پایه و تنظیمات اولیه (مشابه دو صفحه قبل) ---------- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            background-color: #f9f9f9;
+            background-color: #f8fae3;  /* زمینه روشن از صفحه انار */
             color: #333;
             padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        
-        /* 2. کانتینر اصلی */
-        .container {
-            max-width: 800px;
+
+        /* کانتینر اصلی ایندکس – ساده و شبیه به دو صفحه محصول */
+        .index-container {
+            max-width: 900px;
             width: 100%;
             margin: 0 auto;
-            background-color: white;
+            background-color: white;        /* مثل صفحه پسته */
             border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 5px 30px rgba(45, 90, 39, 0.5);
+            padding: 2rem 2rem 1.8rem;
+            box-shadow: 0 5px 25px rgba(45, 90, 39, 0.25); /* ترکیب رنگ سبز و ملایم */
+            border: 1px solid #e0e0e0;
         }
-        
-        /* 3. عنوان اصلی */
-        h1 {
-            color: #2d5a27;
+
+        /* ---------- سرآیند ---------- */
+        .index-header {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 2.5rem;
+        }
+
+        .index-header h1 {
+            color: #2d5a27;                 /* سبز پسته‌ای */
+            border-bottom: 2px dashed #b0b0b0;
+            margin-bottom: 10px;
             padding-bottom: 10px;
-            border-bottom: 2px solid #e0e0e0;
-            font-size: clamp(20px, 5vw, 28px);
+            font-size: clamp(22px, 6vw, 32px);
             word-break: break-word;
         }
-        
-        /* 4. پاراگراف */
-        p {
-            margin-bottom: 20px;
+
+        .subhead {
+            color: firebrick;                /* قرمز انار */
+            font-size: clamp(1rem, 4vw, 1.3rem);
+            background: #fff3e6;
+            display: inline-block;
+            padding: 0.3rem 2rem;
+            border-radius: 30px;
+            border: 1px solid #d0a86a;
+        }
+
+        /* ---------- شبکه دو ستونه ---------- */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+            margin: 30px 0 20px;
+        }
+
+        /* کارت محصول – خیلی ساده و بی‌حاشیه‌های اضافی */
+        .product-card {
+            background-color: #fdfdfd;
+            border-radius: 12px;
+            padding: 1.5rem 1.2rem 1.2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid #ddd;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.1);
+        }
+
+        /* کارت پسته */
+        .pistachio-card {
+            border-top: 5px solid #2d5a27;
+        }
+
+        /* کارت انار */
+        .pomegranate-card {
+            border-top: 5px solid firebrick;
+        }
+
+        /* آیکون / ایموجی محصول */
+        .product-icon {
+            font-size: 3.5rem;
+            text-align: center;
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+
+        /* عنوان محصول */
+        .product-card h2 {
+            font-size: clamp(1.5rem, 5vw, 2.2rem);
+            text-align: center;
+            margin: 5px 0 10px;
+            border-bottom: 1px dotted #aaa;
+            padding-bottom: 8px;
+        }
+
+        .pistachio-card h2 {
+            color: #2d5a27;
+        }
+
+        .pomegranate-card h2 {
+            color: firebrick;
+        }
+
+        /* توضیح کوتاه */
+        .card-description {
             text-align: justify;
-            font-size: clamp(14px, 4vw, 18px);
-        }
-        
-        /* 5. کلمات مهم */
-        .important {
-            color: #2d5a27;
-            font-weight: bold;
-        }
-        
-        /* 6. بخش انواع پسته */
-        .pistachio-types {
-            background-color: #f5f9f4;
-            padding: 20px;
+            font-size: 0.95rem;
+            margin: 10px 0 15px;
+            background-color: #f9f9f9;
+            padding: 10px;
             border-radius: 8px;
-            margin: 30px 0;
-            border-right: 4px solid #2d5a27;
+            flex: 1;
         }
-        
-        .pistachio-types h2 {
-            color: #2d5a27;
-            margin-bottom: 15px;
-            font-size: clamp(16px, 4.5vw, 24px);
+
+        /* بخش خلاصه ویژگی‌ها (لیست) */
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 20px 0;
+            font-size: 0.9rem;
         }
-        
-        /* 7. لیست */
-        ul {
-            padding-right: 20px;
-            margin-bottom: 15px;
+
+        .feature-list li {
+            margin-bottom: 6px;
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
         }
-        
-        li {
-            margin-bottom: 8px;
-            font-size: clamp(14px, 3.5vw, 17px);
-            line-height: 1.5;
+
+        .feature-list li span {
+            color: #b45f2b;
+            font-weight: bold;
+            margin-left: 4px;
         }
-        
-        /* استایل پایه دکمه */
-        button {
-            background-color: #2d5a27;
+
+        /* دکمه‌ها – کاملاً شبیه دکمه‌های صفحات پسته و انار */
+        .card-btn {
+            background-color: #2d5a27; /* fallback */
             color: white;
             border: none;
-            padding: 12px 24px;
+            padding: 12px 18px;
             border-radius: 5px;
-            font-size: clamp(14px, 4vw, 16px);
+            font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 3px 10px rgba(45, 90, 39, 0.3);
-            margin: 20px auto;
-            display: block;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+            width: 100%;
             font-family: inherit;
+            margin-top: 10px;
             text-align: center;
-            width: auto;
-            min-width: 120px;
+            border: none;
+            display: block;
         }
 
-        /* هاور دکمه */
-        button:hover {
+        .pistachio-card .card-btn {
+            background-color: #2d5a27;
+        }
+
+        .pistachio-card .card-btn:hover {
             background-color: #3a6b32;
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(45, 90, 39, 0.4);
+            box-shadow: 0 5px 12px rgba(45, 90, 39, 0.5);
         }
 
-        /* حالت کلیک */
-        button:active {
+        .pomegranate-card .card-btn {
+            background-color: firebrick;
+        }
+
+        .pomegranate-card .card-btn:hover {
+            background-color: #b22222;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(178, 34, 34, 0.4);
+        }
+
+        .card-btn:active {
             transform: translateY(0);
-            box-shadow: 0 2px 5px rgba(45, 90, 39, 0.3);
         }
-
-        /* حالت فوکوس برای دسترسی‌پذیری */
-        button:focus {
+        .card-btn:focus {
             outline: 2px solid #4caf50;
             outline-offset: 2px;
         }
-        
-        /* 8. فوتر */
+
+        /* لینک داخل کارت (دکمه را می‌گیرد) */
+        .product-card a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        /* فوتر – دقیقاً مانند صفحات محصول */
         .footer {
             text-align: center;
-            margin-top: 30px;
+            margin-top: 35px;
             padding-top: 20px;
-            border-top: 2px solid #e0e0e0;
+            border-top: 2px dotted #686868;  /* مثل صفحه انار */
             color: #666;
         }
-        
+
         .aw {
             text-align: center;
             font-size: clamp(12px, 3.5vw, 14px);
             margin-bottom: 5px;
         }
 
-        /* لینک دکمه */
-        a {
-            text-decoration: none;
-            display: block;
-        }
-        
-        /* 9. طراحی واکنش‌گرا - بهبود برای موبایل */
-        @media (max-width: 600px) {
-            body {
-                padding: 10px;
+        /* ریسپانسیو کامل */
+        @media (max-width: 650px) {
+            .index-container {
+                padding: 1.5rem;
             }
-            
-            .container {
-                padding: 20px;
-            }
-            
-            .pistachio-types {
-                padding: 15px;
-            }
-            
-            ul {
-                padding-right: 15px;
+            .product-grid {
+                gap: 20px;
             }
         }
 
         @media (max-width: 480px) {
             body {
-                padding: 8px;
+                padding: 10px;
             }
-            
-            .container {
-                padding: 15px;
-                border-radius: 8px;
+            .index-container {
+                padding: 1.2rem;
             }
-            
-            h1 {
-                font-size: 22px;
+            .product-icon {
+                font-size: 2.8rem;
             }
-            
-            .pistachio-types {
-                padding: 12px;
-                margin: 20px 0;
-            }
-            
-            li {
-                margin-bottom: 10px;
+            .card-btn {
+                padding: 12px 10px;
+                font-size: 1rem;
             }
         }
 
         @media (max-width: 360px) {
-            button {
-                width: 100%;
-                padding: 15px 20px;
-                min-width: auto;
+            .feature-list li {
+                font-size: 0.85rem;
             }
-            
-            .container {
-                padding: 12px;
-            }
-            
-            h1 {
-                font-size: 20px;
-            }
-            
-            p {
-                text-align: right; /* بهتر شدن نمایش در صفحات خیلی کوچک */
+            .card-description {
+                font-size: 0.85rem;
             }
         }
 
-        /* بهبود نمایش برای موبایل‌های بسیار کوچک */
-        @media (max-width: 280px) {
-            body {
-                padding: 5px;
-            }
-            
-            .container {
-                padding: 10px;
-            }
-            
-            .footer p {
-                font-size: 11px;
-            }
+        /* لینک‌های مستقیم (نکته کوچک) */
+        .direct-links {
+            text-align: center;
+            margin: 20px 0 10px;
+            font-size: 0.9rem;
+            background: #f0f0e0;
+            padding: 6px 12px;
+            border-radius: 40px;
+            display: inline-block;
+            width: auto;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        .direct-links a {
+            color: #2d5a27;
+            font-weight: bold;
+            text-decoration: underline dashed #b8860b;
+            margin: 0 5px;
+        }
+        .direct-links a:hover {
+            color: firebrick;
+        }
+        .direct-links span {
+            color: #666;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>معرفی پسته ایرانی</h1>
-        
-        <p>
-            یکی از بهترین محصولات ایران <span class="important">پسته</span> است. این محصول سرشار از 
-            <span class="important">پتاسیم</span>، پروتئین و مواد معدنی مفید برای بدن می‌باشد.
-        </p>
-        
-        <p>
-            مراکز اصلی تولید پسته در <span class="important">استان کرمان</span> و 
-            <span class="important">شهرستان رفسنجان</span> قرار دارند. این مناطق به خاطر خاک مناسب و 
-            آب و هوای مطلوب، بهترین پسته ایران را تولید می‌کنند.
-        </p>
-        
-        <div class="pistachio-types">
-            <h2>انواع پسته ایرانی</h2>
-            <ul>
-                <li><span class="important">پسته فندقی</span> - اندازه متوسط و طعم عالی</li>
-                <li><span class="important">پسته کله قوچی</span> - درشت و خوشمزه</li>
-                <li><span class="important">پسته احمد آقایی</span> - کشیده و مرغوب</li>
-                <li><span class="important">پسته اکبری</span> - بسیار درشت و باکیفیت</li>
-            </ul>
-            <p>
-                هر کدام از این انواع، ویژگی‌های منحصر به فردی دارند و در بازارهای داخلی و خارجی طرفداران زیادی دارند.
-            </p>
+    <div class="index-container">
+        <!-- هدر ساده با دو رنگ از هر محصول -->
+        <div class="index-header">
+            <h1>🍇 محصولات ایرانی 🍃</h1>
+            <div class="subhead">
+                پسته و انار؛ دو گوهر سرسبز و سرخ
+            </div>
         </div>
-        
-        <a href="https://darabi-a.github.io/testhost2/"><button>بعدی</button></a>
-        
+
+        <!-- شبکه محصولات: پسته و انار -->
+        <div class="product-grid">
+            <!-- کارت پسته (مشابه صفحه پسته) -->
+            <div class="product-card pistachio-card">
+                <div class="product-icon">🌰🟢</div>
+                <h2>پسته</h2>
+                <div class="card-description">
+                    پسته ایرانی سرشار از پتاسیم و پروتئین. محصول اصلی استان کرمان و رفسنجان.
+                </div>
+                <!-- خلاصه انواع از صفحه پسته -->
+                <ul class="feature-list">
+                    <li><span>✔</span> فندقی، کله قوچی</li>
+                    <li><span>✔</span>احمد آقایی</li>
+                    <li><span>✔</span>اکبری</li>
+                </ul>
+                <!-- لینک به صفحه پسته (همان آدرس قبلی) -->
+                <a href="https://darabi-a.github.io/testhost/tamrin.html">
+                    <button class="card-btn">مشاهده صفحه پسته</button>
+                </a>
+            </div>
+
+            <!-- کارت انار (مشابه صفحه انار) -->
+            <div class="product-card pomegranate-card">
+                <div class="product-icon">🍎🔴</div>
+                <h2>انار</h2>
+                <div class="card-description">
+                    انار ایرانی منبع ویتامین B6 و آنتی‌اکسیدان. با طعم‌های ترش، شیرین و ملس.
+                </div>
+                <!-- خلاصه انواع از صفحه انار -->
+                <ul class="feature-list">
+                    <li><span>✔</span> انار ترش</li>
+                    <li><span>✔</span> انار شیرین</li>
+                    <li><span>✔</span> انار دومزه</li>
+                </ul>
+                <!-- لینک به صفحه انار (آدرس صفحه اول) -->
+                <a href="https://darabi-a.github.io/testhost/tamrin1.html">
+                    <button class="card-btn">مشاهده صفحه انار</button>
+                </a>
+            </div>
+        </div>
+
+        <!-- لینک‌های مستقیت (فقط برای دسترسی سریع) -->
+        <div style="text-align: center;">
+            <div class="direct-links">
+                <span>🔗</span> 
+                <a href="https://darabi-a.github.io/testhost/tamrin.html">صفحه پسته</a> 
+                <span>|</span> 
+                <a href="https://darabi-a.github.io/testhost/tamrin1.html">صفحه انار</a>
+                <span>🔗</span>
+            </div>
+        </div>
+
+        <!-- فوتر دقیقاً مشابه دو صفحه قبلی -->
         <div class="footer">
             <p class="aw">محصولات ایرانی • کارگاه 13 واحد یادگیری 2 • 1404</p>
             <p class="aw">ابوالفضل دارابی • کلاس یازدهم کامپیوتر • هنرستان ابوریحان بیرونی</p>
